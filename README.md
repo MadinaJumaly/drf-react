@@ -57,6 +57,7 @@ A `postman_collection.json` is included with all four requests pre-configured.
 
 ## Project structure
 
+```
 .
 ├── docker-compose.yml      # 3 services: db, backend, frontend
 ├── Dockerfile              # Backend image (python:3.13-slim)
@@ -68,6 +69,7 @@ A `postman_collection.json` is included with all four requests pre-configured.
 ├── requirements.txt
 ├── .env.example
 └── postman_collection.json
+```
 
 ## Running locally without Docker
 
