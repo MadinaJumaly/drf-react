@@ -1,0 +1,116 @@
+{
+  "info": {
+    "name": "AI Tanym Test Task",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "POST Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const data = pm.response.json();",
+              "pm.collectionVariables.set('token', data.token);",
+              "pm.test('Login returns token and username', () => {",
+              "    pm.response.to.have.status(200);",
+              "    pm.expect(data).to.have.property('token');",
+              "    pm.expect(data).to.have.property('username');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"madina\",\n    \"password\": \"madina\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/login/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "login", ""]
+        }
+      }
+    },
+    {
+      "name": "GET Client",
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {"key": "key", "value": "Authorization", "type": "string"},
+            {"key": "value", "value": "Token {{token}}", "type": "string"},
+            {"key": "in", "value": "header", "type": "string"}
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/client/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "client", ""]
+        }
+      }
+    },
+    {
+      "name": "PUT Client",
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {"key": "key", "value": "Authorization", "type": "string"},
+            {"key": "value", "value": "Token {{token}}", "type": "string"},
+            {"key": "in", "value": "header", "type": "string"}
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Madina\",\n    \"email\": \"m@example.com\",\n    \"phone\": \"+77001234567\",\n    \"address\": \"Astana\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/client/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "client", ""]
+        }
+      }
+    },
+    {
+      "name": "PATCH Client",
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {"key": "key", "value": "Authorization", "type": "string"},
+            {"key": "value", "value": "Token {{token}}", "type": "string"},
+            {"key": "in", "value": "header", "type": "string"}
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"phone\": \"+77009999999\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/client/",
+          "host": ["{{base_url}}"],
+          "path": ["api", "client", ""]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {"key": "base_url", "value": "http://localhost:81"},
+    {"key": "token", "value": ""}
+  ]
+}

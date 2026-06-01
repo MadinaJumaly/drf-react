@@ -1,0 +1,37 @@
+services:
+
+  db:
+    image: postgres:17
+    container_name: drf-react
+    environment:
+      POSTGRES_DB: drf-react
+      POSTGRES_USER: madina
+      POSTGRES_PASSWORD: madina
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: drf-react-backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "81:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: drf-react-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
