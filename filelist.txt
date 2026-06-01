@@ -1,0 +1,12 @@
+Dockerfile
+all_code.txt
+api
+backend
+db.sqlite3
+docker-compose.yml
+filelist.txt
+frontend
+manage.py
+postman_collection.json
+requirements.txt
+venv

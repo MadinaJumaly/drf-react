@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { api } from '../lib/api'
-
+import { useNavigate, Link } from 'react-router-dom'
 export default function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -53,6 +52,7 @@ export default function LoginPage() {
           {loading ? 'Signing in...' : 'Sign in'}
         </button>
       </form>
+      <p>Don't have an account? <Link to="/register">Register</Link></p>
     </div>
   )
 }

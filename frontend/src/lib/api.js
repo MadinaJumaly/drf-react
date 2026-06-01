@@ -22,7 +22,15 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     }),
+
+  register: (data) =>
+    request('/api/register/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
   getClient: () => request('/api/client/'),
+
   updateClient: (data) =>
     request('/api/client/', {
       method: 'PUT',

@@ -7,7 +7,59 @@ from rest_framework.response import Response
 
 from .models import Client
 from .serializers import ClientSerializer
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
+
+@api_view(['POST'])
+
+@permission_classes([AllowAny])
+
+def register(request):
+
+    username = request.data.get('username')
+
+    if User.objects.filter(username=username).exists():
+
+        return Response(
+
+            {'error': 'Username already exists'},
+
+            status=status.HTTP_400_BAD_REQUEST,
+
+        )
+
+    user = User.objects.create_user(
+
+        username=username,
+
+        password=request.data.get('password'),
+
+    )
+
+    Client.objects.create(
+
+        user=user,
+
+        name=request.data.get('name'),
+
+        email=request.data.get('email'),
+
+        phone=request.data.get('phone'),
+
+        address=request.data.get('address'),
+
+    )
+
+    token, _ = Token.objects.get_or_create(user=user)
+
+    return Response({
+
+        'token': token.key,
+
+        'username': user.username,
+
+    })
 
 @api_view(['POST'])
 @permission_classes([AllowAny])

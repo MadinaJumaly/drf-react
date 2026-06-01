@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import CabinetPage from './pages/CabinetPage'
+import RegisterPage from './pages/RegisterPage'
 import './App.css'
 
 function ProtectedRoute({ children }) {
@@ -13,6 +14,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route
           path="/cabinet"
           element={
