@@ -22,7 +22,11 @@ export default function RegisterPage() {
     e.preventDefault()
     setError('')
     setLoading(true)
-
+    if (form.password !== form.password2) {
+        setError('Passwords do not match')
+        setLoading(false)
+        return
+    }
     try {
       const data = await api.register(form)
 
